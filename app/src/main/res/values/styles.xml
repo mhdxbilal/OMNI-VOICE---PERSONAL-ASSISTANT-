@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.OmniVoice" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.AURA" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#6366f1</item>
         <item name="android:statusBarColor">#0f172a</item>
     </style>

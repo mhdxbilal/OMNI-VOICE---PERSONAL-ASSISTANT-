@@ -1,0 +1,1 @@
+sed -i "s/import { ModelManagerSection } from '.\/components\/ModelManagerSection';/import { ModelManagerSection } from '.\/components\/ModelManagerSection';\nimport { OnboardingFlow } from '.\/components\/OnboardingFlow';/g" src/App.tsx

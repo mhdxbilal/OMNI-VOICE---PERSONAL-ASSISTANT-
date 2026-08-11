@@ -1,2 +1,2 @@
-# Proguard rules for OmniVoice Assistant
+# Proguard rules for AURA Assistant
 -keep class com.mobileaction.omnivoise.** { *; }

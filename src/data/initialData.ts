@@ -276,8 +276,8 @@ export const MODEL_PACKAGES: ModelPackage[] = [
     sizeMb: 270,
     version: 'v2.4-lite',
     language: 'Bilingual (En + Ml)',
-    isDownloaded: true,
-    downloadProgress: 100,
+    isDownloaded: false,
+    downloadProgress: 0,
     isDownloading: false,
   },
   {
@@ -287,8 +287,8 @@ export const MODEL_PACKAGES: ModelPackage[] = [
     sizeMb: 85,
     version: 'v1.8',
     language: 'Malayalam (ml-IN)',
-    isDownloaded: true,
-    downloadProgress: 100,
+    isDownloaded: false,
+    downloadProgress: 0,
     isDownloading: false,
   },
   {
@@ -298,8 +298,8 @@ export const MODEL_PACKAGES: ModelPackage[] = [
     sizeMb: 110,
     version: 'v2.1',
     language: 'English (en-IN)',
-    isDownloaded: true,
-    downloadProgress: 100,
+    isDownloaded: false,
+    downloadProgress: 0,
     isDownloading: false,
   },
   {
@@ -309,8 +309,8 @@ export const MODEL_PACKAGES: ModelPackage[] = [
     sizeMb: 42,
     version: 'v3.0-secure',
     language: 'Core Security',
-    isDownloaded: true,
-    downloadProgress: 100,
+    isDownloaded: false,
+    downloadProgress: 0,
     isDownloading: false,
   },
 ];

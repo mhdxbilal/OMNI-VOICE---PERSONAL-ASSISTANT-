@@ -96,6 +96,15 @@ export const DeviceDashboardSection: React.FC<DeviceDashboardSectionProps> = ({
   };
 
   // Force re-sync audio stack across all paired devices
+  const handleScanDevices = () => {
+    setSyncLogMessage("Scanning for nearby Bluetooth audio devices in pairing mode...");
+    setIsFullStackSyncing(true);
+    setTimeout(() => {
+      setSyncLogMessage("Scan complete. No new devices found.");
+      setIsFullStackSyncing(false);
+      setTimeout(() => setSyncLogMessage(null), 3000);
+    }, 2500);
+  };
   const handleFullStackSync = () => {
     setIsFullStackSyncing(true);
     setSyncLogMessage('Scanning Bluetooth stack & re-synchronizing codec profiles for all paired devices...');
@@ -136,7 +145,7 @@ export const DeviceDashboardSection: React.FC<DeviceDashboardSectionProps> = ({
 
           <button
             id="pair-device-btn"
-            onClick={() => alert('Scanning for nearby Bluetooth audio devices in pairing mode...')}
+            onClick={() => handleScanDevices()}
             className="flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs shadow-lg shadow-indigo-600/30 transition-all active:scale-95"
           >
             <Plus className="w-4 h-4" />

@@ -1,5 +1,5 @@
 {
-  "name": "Remix OmniVoice Assistant",
+  "name": "Remix AURA Assistant",
   "description": "Secure bilingual assistant for hands-free scheduling, communication, and music control using offline English and Malayalam voice recognition. ",
   "requestFramePermissions": [
     "microphone"

@@ -13,6 +13,7 @@ import {
   Smartphone,
   ListOrdered,
   Cpu,
+  Settings,
 } from 'lucide-react';
 import { LanguageMode } from '../types';
 
@@ -245,6 +246,18 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <DownloadCloud className="w-4 h-4" />
             <span>Speech Models</span>
+          </button>
+          <button
+            id="tab-settings"
+            onClick={() => setActiveTab('settings')}
+            className={`flex items-center space-x-2 px-3 py-2 rounded-lg whitespace-nowrap transition-colors ${
+              activeTab === 'settings'
+                ? 'bg-indigo-600/90 text-white shadow-md'
+                : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+            }`}
+          >
+            <Settings className="w-4 h-4" />
+            <span>Assistant Settings</span>
           </button>
         </nav>
       </div>

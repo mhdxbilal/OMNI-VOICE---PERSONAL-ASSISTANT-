@@ -8,6 +8,8 @@ import { CalendarPlannerSection } from './components/CalendarPlannerSection';
 import { DeviceDashboardSection } from './components/DeviceDashboardSection';
 import { AccentCalibrationSection } from './components/AccentCalibrationSection';
 import { ModelManagerSection } from './components/ModelManagerSection';
+import { OnboardingFlow } from './components/OnboardingFlow';
+import { SettingsSection } from './components/SettingsSection';
 import { BackgroundAndLockScreenSettings } from './components/BackgroundAndLockScreenSettings';
 import { ShortcutBuilderSection } from './components/ShortcutBuilderSection';
 import { VoiceLogDrawer } from './components/VoiceLogDrawer';
@@ -39,6 +41,9 @@ import {
 } from './data/initialData';
 
 export default function App() {
+  const [hasCompletedSetup, setHasCompletedSetup] = useState<boolean>(() => {
+    return localStorage.getItem('mbxtg_setup_complete') === 'true';
+  });
   const [activeTab, setActiveTab] = useState<string>('assistant');
   const [language, setLanguage] = useState<LanguageMode>('bilingual');
   const [isOffline, setIsOffline] = useState<boolean>(false);
@@ -247,6 +252,32 @@ export default function App() {
         setEvents((prev) => [newEvt, ...prev]);
       } else if (data.actionType === 'MUSIC_PLAY') {
         const songName = (params.songName || '').toLowerCase();
+        const artist = (params.artistName || '').toLowerCase();
+        const platform = (params.platform || '').toLowerCase();
+        const query = `${songName} ${artist}`.trim();
+        
+        if (platform.includes('youtube')) {
+          if (window.AndroidNative) {
+            window.AndroidNative.searchYouTube(query);
+          } else {
+             window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, '_blank');
+          }
+        } else if (platform.includes('spotify')) {
+           if (window.AndroidNative) {
+             window.AndroidNative.searchSpotify(query);
+           } else {
+             window.open(`https://open.spotify.com/search/${encodeURIComponent(query)}`, '_blank');
+           }
+        } else {
+           // Default fallback
+           if (window.AndroidNative) {
+             window.AndroidNative.searchYouTube(query);
+           } else {
+             window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, '_blank');
+           }
+        }
+        
+        // Find local fake data to simulate UI update
         const matchedSong = songs.find(
           (s) => s.title.toLowerCase().includes(songName) || s.artist.toLowerCase().includes(songName)
         );
@@ -362,13 +393,34 @@ export default function App() {
 
   // Model handlers
   const handleDownloadModel = (modelId: string) => {
+    const model = models.find(m => m.id === modelId);
+    if (!model) return;
+
+    let downloadUrl = "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip";
+    if (model.language.toLowerCase().includes('malayalam')) {
+        downloadUrl = "https://alphacephei.com/vosk/models/vosk-model-ml-0.17.zip";
+    } else if (model.language.toLowerCase().includes('english') && model.sizeMb > 100) {
+        downloadUrl = "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip";
+    }
+
+    if (window.AndroidNative && window.AndroidNative.downloadModel) {
+        window.AndroidNative.downloadModel(
+            downloadUrl, 
+            `${model.name.replace(/ /g, '_')}_Model`, 
+            `Downloading offline voice model: ${model.name}`
+        );
+    } else {
+        window.open(downloadUrl, '_blank');
+    }
+
     setModels((prev) =>
       prev.map((m) => (m.id === modelId ? { ...m, isDownloading: true, downloadProgress: 10 } : m))
     );
 
+    // Simulate progress in UI while the real Android DownloadManager works in the background
     let prog = 10;
     const interval = setInterval(() => {
-      prog += 25;
+      prog += 15;
       if (prog >= 100) {
         clearInterval(interval);
         setModels((prev) =>
@@ -379,32 +431,37 @@ export default function App() {
           prev.map((m) => (m.id === modelId ? { ...m, downloadProgress: prog } : m))
         );
       }
-    }, 600);
+    }, 1500);
   };
 
   // WhatsApp quick triggers
   const handleTriggerWhatsAppCall = (contact: PhoneContact, isVideo: boolean) => {
-    setActiveCallContact({
-      ...contact,
-      isWhatsAppCall: true,
-      isVideoCall: isVideo,
-    });
+    if (window.AndroidNative) {
+      window.AndroidNative.sendWhatsApp(contact.phoneNumber, "Calling you via OmniVoice...");
+    } else {
+      window.open(`https://wa.me/${contact.phoneNumber}?text=Calling...`, '_blank');
+    }
   };
 
   const handleTriggerWhatsAppMsg = (contact: PhoneContact, msg: string) => {
-    setSentSms({
-      id: 'wa-' + Date.now(),
-      recipientName: contact.name,
-      phoneNumber: contact.phoneNumber,
-      body: msg,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      status: 'delivered',
-      appSource: 'WhatsApp',
-    });
+    if (window.AndroidNative) {
+      window.AndroidNative.sendWhatsApp(contact.phoneNumber, msg);
+    } else {
+      window.open(`https://wa.me/${contact.phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
   };
 
   return (
-    <AndroidSystemFrame
+    <>
+      {!hasCompletedSetup && (
+        <OnboardingFlow 
+          onComplete={() => {
+            localStorage.setItem('mbxtg_setup_complete', 'true');
+            setHasCompletedSetup(true);
+          }} 
+        />
+      )}
+      <AndroidSystemFrame
       activeTab={activeTab}
       setActiveTab={setActiveTab}
       language={language}
@@ -575,6 +632,9 @@ export default function App() {
         {activeTab === 'models' && (
           <ModelManagerSection models={models} onDownloadModel={handleDownloadModel} />
         )}
+        {activeTab === 'settings' && (
+          <SettingsSection />
+        )}
       </main>
 
       {/* Active Call / SMS Modal Overlays */}
@@ -585,5 +645,6 @@ export default function App() {
         onCloseSms={() => setSentSms(null)}
       />
     </AndroidSystemFrame>
+    </>
   );
 }

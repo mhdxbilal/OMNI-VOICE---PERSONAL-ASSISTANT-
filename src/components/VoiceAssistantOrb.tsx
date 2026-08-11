@@ -55,6 +55,7 @@ export const VoiceAssistantOrb: React.FC<VoiceAssistantOrbProps> = ({
   const [interimText, setInterimText] = useState('');
   const [speechError, setSpeechError] = useState<string | null>(null);
   const [isSpeakingResponse, setIsSpeakingResponse] = useState(false);
+  const [actionStatus, setActionStatus] = useState<string | null>(null);
 
   // Toggle voice listening via Web Speech API with immediate barge-in interruption
   const handleToggleListening = () => {
@@ -369,13 +370,13 @@ export const VoiceAssistantOrb: React.FC<VoiceAssistantOrbProps> = ({
                 </p>
                 <div className="flex items-center space-x-2 mt-2">
                   <button
-                    onClick={() => alert('Action confirmed by user.')}
+                    onClick={() => setActionStatus('Confirmed')}
                     className="px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-[11px]"
                   >
                     Confirm & Execute
                   </button>
                   <button
-                    onClick={() => alert('Action cancelled.')}
+                    onClick={() => setActionStatus('Cancelled')}
                     className="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px]"
                   >
                     Cancel

@@ -1,0 +1,1 @@
+sed -i "s/import { OnboardingFlow } from '.\/components\/OnboardingFlow';/import { OnboardingFlow } from '.\/components\/OnboardingFlow';\nimport { SettingsSection } from '.\/components\/SettingsSection';/g" src/App.tsx

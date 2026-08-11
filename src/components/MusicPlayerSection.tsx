@@ -51,6 +51,9 @@ export const MusicPlayerSection: React.FC<MusicPlayerSectionProps> = ({
   const [currentTime, setCurrentTime] = useState(42);
   const platforms = ['All', 'Spotify', 'YouTube Music', 'Apple Music', 'Wynk Music', 'Amazon Music', 'Offline Local'];
 
+  useEffect(() => {
+    setCurrentTime(0);
+  }, [currentTrack.id]);
   // Simulate timeline ticking when playing
   useEffect(() => {
     let interval: any = null;

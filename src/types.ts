@@ -179,3 +179,15 @@ export interface BackgroundServiceConfig {
   accessibilityGranted: boolean;
   autoScrollSpeedMs: number;
 }
+declare global {
+  interface Window {
+    AndroidNative?: {
+      sendWhatsApp: (phoneNumber: string, message: string) => void;
+      searchSpotify: (query: string) => void;
+      searchYouTube: (query: string) => void;
+      downloadModel: (url: string, title: string, description: string) => void;
+      openAssistantSettings: () => void;
+      openAccessibilitySettings: () => void;
+    };
+  }
+}

@@ -96,7 +96,7 @@ export const AndroidSystemFrame: React.FC<AndroidSystemFrameProps> = ({
               <span className="text-emerald-400 font-medium">Mic Active</span>
               <span className="text-slate-600">•</span>
               <span className="text-indigo-400 font-mono text-[10px] bg-indigo-500/10 px-1.5 py-0.5 rounded border border-indigo-500/20">
-                com.mobileaction.omnivoise
+                com.mobileaction.mbxtg
               </span>
             </div>
           </div>
