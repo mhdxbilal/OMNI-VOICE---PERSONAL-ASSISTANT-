@@ -1,0 +1,10 @@
+{
+  "name": "Remix OmniVoice Assistant",
+  "description": "Secure bilingual assistant for hands-free scheduling, communication, and music control using offline English and Malayalam voice recognition. ",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

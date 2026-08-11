@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Space Gradient -->
+    <radialGradient id="spaceGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1e1035"/>
+      <stop offset="60%" stop-color="#0b0618"/>
+      <stop offset="100%" stop-color="#030108"/>
+    </radialGradient>
+
+    <!-- Glowing Moon Gradient -->
+    <radialGradient id="moonGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ff9ebb"/>
+      <stop offset="40%" stop-color="#ff4b8b"/>
+      <stop offset="85%" stop-color="#d62464"/>
+      <stop offset="100%" stop-color="#800a38"/>
+    </radialGradient>
+
+    <!-- Mountain Gradient -->
+    <linearGradient id="mountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffaa64"/>
+      <stop offset="40%" stop-color="#e65c40"/>
+      <stop offset="100%" stop-color="#4a154b"/>
+    </linearGradient>
+
+    <!-- Foreland Mountain Gradient -->
+    <linearGradient id="foreMountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00a896"/>
+      <stop offset="50%" stop-color="#028090"/>
+      <stop offset="100%" stop-color="#05386b"/>
+    </linearGradient>
+
+    <!-- Cave Frame Gradient -->
+    <linearGradient id="caveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d124d"/>
+      <stop offset="50%" stop-color="#180a2e"/>
+      <stop offset="100%" stop-color="#080214"/>
+    </linearGradient>
+
+    <!-- Astronaut Suit Highlights -->
+    <linearGradient id="suitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="60%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+
+    <!-- Visor Reflection -->
+    <linearGradient id="visorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb703"/>
+      <stop offset="50%" stop-color="#fb8500"/>
+      <stop offset="100%" stop-color="#d62464"/>
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- App Icon Base Clip Rounded Box -->
+  <rect width="512" height="512" rx="112" fill="url(#spaceGrad)"/>
+
+  <!-- Background Stars -->
+  <g fill="#ffffff" opacity="0.8">
+    <circle cx="80" cy="70" r="1.5"/>
+    <circle cx="140" cy="50" r="2.5"/>
+    <circle cx="210" cy="90" r="1.2"/>
+    <circle cx="330" cy="40" r="2"/>
+    <circle cx="420" cy="80" r="1.5"/>
+    <circle cx="460" cy="130" r="2"/>
+    <circle cx="90" cy="160" r="1"/>
+    <circle cx="430" cy="220" r="1.8"/>
+  </g>
+
+  <!-- Distant Glowing Pink Moon -->
+  <circle cx="180" cy="160" r="55" fill="url(#moonGrad)" filter="url(#glow)"/>
+  <!-- Moon Craters -->
+  <circle cx="160" cy="140" r="9" fill="#b01b4c" opacity="0.4"/>
+  <circle cx="195" cy="170" r="12" fill="#b01b4c" opacity="0.3"/>
+  <circle cx="170" cy="185" r="7" fill="#b01b4c" opacity="0.35"/>
+
+  <!-- Distant Sunset Clouds -->
+  <path d="M 100 240 Q 180 200 260 230 Q 340 210 420 250 L 420 280 L 100 280 Z" fill="#ff4b8b" opacity="0.35"/>
+
+  <!-- Back Mountain Range -->
+  <path d="M 80 340 L 170 230 L 260 300 L 360 210 L 440 330 L 440 380 L 80 380 Z" fill="url(#mountainGrad)"/>
+
+  <!-- Mid Mountain Range (Teal/Cyan Shades) -->
+  <path d="M 60 380 L 140 310 L 220 360 L 310 290 L 400 370 L 460 330 L 460 420 L 60 420 Z" fill="url(#foreMountainGrad)"/>
+
+  <!-- Cave Frame Archway Framing the View -->
+  <path d="M 0 0 L 512 0 L 512 512 L 0 512 Z M 256 60 C 130 60 60 140 60 270 C 60 380 120 440 256 440 C 392 440 452 380 452 270 C 452 140 382 60 256 60 Z" fill="url(#caveGrad)"/>
+
+  <!-- Foreground Jagged Ground -->
+  <path d="M 50 420 Q 150 400 256 425 Q 360 395 462 420 L 512 512 L 0 512 Z" fill="#080214"/>
+
+  <!-- Central Astronaut Silhouette & Detail -->
+  <g transform="translate(216, 220)">
+    <!-- Helmet & Visor -->
+    <rect x="22" y="10" width="36" height="34" rx="17" fill="#334155"/>
+    <ellipse cx="40" cy="27" rx="14" ry="11" fill="url(#visorGrad)"/>
+    <!-- Visor Glint -->
+    <ellipse cx="36" cy="23" rx="4" ry="2" fill="#ffffff" opacity="0.7"/>
+
+    <!-- Oxygen Backpack with Status Lights -->
+    <rect x="48" y="38" width="18" height="42" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+    <!-- LED Indicators -->
+    <circle cx="57" cy="46" r="1.5" fill="#22c55e"/>
+    <circle cx="57" cy="52" r="1.5" fill="#3b82f6"/>
+    <circle cx="57" cy="58" r="1.5" fill="#ef4444"/>
+
+    <!-- Suit Body -->
+    <path d="M 18 42 C 18 36 62 36 62 42 L 58 100 L 22 100 Z" fill="url(#suitGrad)"/>
+
+    <!-- Suit Folds & Belt -->
+    <rect x="20" y="70" width="40" height="6" rx="2" fill="#0f172a"/>
+    <!-- Shoulder Patch -->
+    <circle cx="23" cy="48" r="3.5" fill="#ff4b8b"/>
+
+    <!-- Legs -->
+    <rect x="22" y="100" width="16" height="55" rx="7" fill="#1e293b"/>
+    <rect x="42" y="100" width="16" height="55" rx="7" fill="#0f172a"/>
+
+    <!-- Boots -->
+    <path d="M 18 150 L 38 150 L 38 160 Q 28 162 16 160 Z" fill="#020617"/>
+    <path d="M 40 150 L 60 150 L 62 160 Q 50 162 38 160 Z" fill="#020617"/>
+  </g>
+</svg>
