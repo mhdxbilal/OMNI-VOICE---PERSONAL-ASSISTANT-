@@ -363,7 +363,7 @@ object AppIntentHandler {
                 putExtra(AlarmClock.EXTRA_MINUTES, minute)
                 putExtra(AlarmClock.EXTRA_SKIP_UI, false)
                 if (recurring) {
-                    putExtra(AlarmClock.EXTRA_DAYS, arrayListOf(
+                    putIntegerArrayListExtra(AlarmClock.EXTRA_DAYS, arrayListOf(
                         java.util.Calendar.MONDAY, java.util.Calendar.TUESDAY, java.util.Calendar.WEDNESDAY,
                         java.util.Calendar.THURSDAY, java.util.Calendar.FRIDAY
                     ))
