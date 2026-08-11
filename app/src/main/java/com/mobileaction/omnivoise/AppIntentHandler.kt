@@ -363,10 +363,15 @@ object AppIntentHandler {
                 putExtra(AlarmClock.EXTRA_MINUTES, minute)
                 putExtra(AlarmClock.EXTRA_SKIP_UI, false)
                 if (recurring) {
-                    putIntegerArrayListExtra(AlarmClock.EXTRA_DAYS, arrayListOf(
-                        java.util.Calendar.MONDAY, java.util.Calendar.TUESDAY, java.util.Calendar.WEDNESDAY,
-                        java.util.Calendar.THURSDAY, java.util.Calendar.FRIDAY
-                    ))
+                    val days = java.util.ArrayList<Int>()
+                    days.add(java.util.Calendar.MONDAY)
+                    days.add(java.util.Calendar.TUESDAY)
+                    days.add(java.util.Calendar.WEDNESDAY)
+                    days.add(java.util.Calendar.THURSDAY)
+                    days.add(java.util.Calendar.FRIDAY)
+                    val bundle = android.os.Bundle()
+                    bundle.putIntegerArrayList(AlarmClock.EXTRA_DAYS, days)
+                    putExtras(bundle)
                 }
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
             }
